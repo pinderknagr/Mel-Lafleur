@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPH Hospital - Signature Sheet</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #signature-pad {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>NPH Hospital - Signature Sheet</h1>
+
+    <div id="signature-pad"></div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Print Name</th>
+                <th>Initials</th>
+                <th>Designation</th>
+                <th>Signature</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="false" id="signature-cell"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="saveSignature()">Sign Document</button>
+
+    <script src="https://unpkg.com/signature_pad"></script>
+    <script>
+        var canvas = document.createElement("canvas");
+        canvas.width = 300;
+        canvas.height = 150;
+        document.getElementById("signature-cell").appendChild(canvas);
+
+        var signaturePad = new SignaturePad(canvas);
+
+        function saveSignature() {
+            if (signaturePad.isEmpty()) {
+                alert('Please provide your signature.');
+            } else {
+                var signatureDataURL = signaturePad.toDataURL();
+                alert('Document signed successfully!');
+                // You can send the signature dataURL to a server or perform other actions here.
+            }
+        }
+    </script>
+</body>
+
+</html>
